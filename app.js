@@ -14,7 +14,7 @@ const state = {
   editingNoteId: null,
   settings: {
     host: localStorage.getItem('sh_host') || 'http://localhost:11434',
-    model: localStorage.getItem('sh_model') || 'gemma3',
+    model: localStorage.getItem('sh_model') || 'gemma3n:e2b',
   },
 };
 
@@ -84,7 +84,7 @@ el('btn-settings').onclick = () => {
 el('btn-settings-cancel').onclick = () => el('settings-modal').classList.add('hidden');
 el('btn-settings-save').onclick = () => {
   state.settings.host = el('setting-host').value.trim() || 'http://localhost:11434';
-  state.settings.model = el('setting-model').value.trim() || 'gemma3';
+  state.settings.model = el('setting-model').value.trim() || 'gemma3n:e2b';
   localStorage.setItem('sh_host', state.settings.host);
   localStorage.setItem('sh_model', state.settings.model);
   el('settings-modal').classList.add('hidden');
