@@ -36,6 +36,9 @@
   </header>
 
   <main class="wrap hero-grid">
+    <div class="bg-blob bg-blob-1" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob-2" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob-3" aria-hidden="true"></div>
     <div class="hero-copy">
       <span class="eyebrow">✦ RUNS FULLY OFFLINE</span>
       <h1>Smarter studying,<br/>better results.</h1>
@@ -222,9 +225,9 @@
       <input type="text" id="setting-host" placeholder="http://localhost:11434" />
     </label>
     <label>Model name
-      <input type="text" id="setting-model" placeholder="gemma4:e2b" />
+      <input type="text" id="setting-model" placeholder="gemma3n:e2b" />
     </label>
-    <p class="hint">Model must already be pulled via <code>ollama pull gemma4:e2b</code>. If this app is served from a different origin than Ollama, set <code>OLLAMA_ORIGINS=*</code> before starting the Ollama server.</p>
+    <p class="hint">Model must already be pulled via <code>ollama pull gemma3n:e2b</code>. If this app is served from a different origin than Ollama, set <code>OLLAMA_ORIGINS=*</code> before starting the Ollama server.</p>
     <div class="modal-actions" style="justify-content:space-between;">
       <button class="btn btn-ghost danger" id="btn-clear-data">Clear all data</button>
       <div style="display:flex; gap:10px;">
@@ -235,6 +238,10 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="landing-animations.js"></script>
 <script src="vendor/pdf.min.js"></script>
 <script src="db.js"></script>
 <script src="app.js"></script>
