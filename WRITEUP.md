@@ -28,7 +28,7 @@ Every feature is designed around the constraint of local-only inference:
 - A service worker caches the entire app shell, so the UI itself loads
   without a network connection — only the Ollama call needs the local
   server running.
-- The app explicitly targets **gemma3n:e2b**, Gemma 3n's "effective 2B"
+- The app explicitly targets **gemma4:e2b**, Gemma 4's "effective 2B"
   edge-optimized variant, chosen specifically for its small footprint and
   fast local inference on modest hardware — exactly the kind of device a
   student actually owns.
@@ -88,7 +88,7 @@ quiz deck in one step, entirely offline.
   CDN at runtime, so document upload doesn't silently break the moment
   there's no internet.
 
-## Why gemma3n:e2b specifically
+## Why gemma4:e2b specifically
 
 The e2b variant was chosen over larger Gemma checkpoints because it's
 realistic for the hardware a student actually has — a laptop without a
@@ -96,16 +96,36 @@ discrete GPU. It loads fast, responds fast, and is small enough that
 `ollama pull` doesn't itself become a barrier on the kind of connection
 this project is designed to route around.
 
+## Security & privacy notes
+
+Being upfront about this rather than glossing over it:
+
+- **No auth, no encryption at rest.** IndexedDB data is plaintext on the
+  device — appropriate for a single-user study tool, not a hardened
+  multi-user system.
+- **`OLLAMA_ORIGINS`** must be scoped to the actual demo origin rather than
+  left wide open long-term, since a permissive setting allows any page open
+  in the same browser to reach the local Ollama server.
+- **Prompt injection via documents** is a known, unmitigated surface —
+  nothing currently strips instruction-like text from an uploaded PDF/note
+  before it's concatenated into model context. Low-stakes for a study tool,
+  but worth naming rather than pretending it isn't there.
+- Every user- and model-generated string rendered into the DOM is escaped
+  (`escapeHtml()`/`textContent`), so the app isn't XSS-vulnerable to a
+  malicious filename or model response.
+- The repository itself contains no secrets or API keys — it's a static
+  frontend, safe to keep public.
+
 ## Reproducing this submission
 
 Full setup instructions are in `README.md` in the repository. In short:
 
 ```bash
-ollama pull gemma3n:e2b
+ollama pull gemma4:e2b
 ollama serve
 cd studyhelper-pwa && python3 -m http.server 8080
 # open http://localhost:8080
 ```
 
-Code repository: **[add your public GitHub URL here]**
-Live demo: **[add your hosted URL or screen recording here]**
+Code repository: **https://github.com/kp4615539/studyhelper-pwa**
+Live demo: **https://kp4615539.github.io/studyhelper-pwa/** (requires Ollama running locally with `gemma4:e2b` pulled and `OLLAMA_ORIGINS` set to allow this origin — see README)
