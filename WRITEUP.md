@@ -28,7 +28,7 @@ Every feature is designed around the constraint of local-only inference:
 - A service worker caches the entire app shell, so the UI itself loads
   without a network connection — only the Ollama call needs the local
   server running.
-- The app explicitly targets **gemma3n:e2b**, Gemma 3n's "effective 2B"
+- The app explicitly targets **gemma4:e2b**, Gemma 4's "effective 2B"
   edge-optimized variant, chosen specifically for its small footprint and
   fast local inference on modest hardware — exactly the kind of device a
   student actually owns.
@@ -88,7 +88,7 @@ quiz deck in one step, entirely offline.
   CDN at runtime, so document upload doesn't silently break the moment
   there's no internet.
 
-## Why gemma3n:e2b specifically
+## Why gemma4:e2b specifically
 
 The e2b variant was chosen over larger Gemma checkpoints because it's
 realistic for the hardware a student actually has — a laptop without a
@@ -101,7 +101,7 @@ this project is designed to route around.
 Full setup instructions are in `README.md` in the repository. In short:
 
 ```bash
-ollama pull gemma3n:e2b
+ollama pull gemma4:e2b
 ollama serve
 cd studyhelper-pwa && python3 -m http.server 8080
 # open http://localhost:8080

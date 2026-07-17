@@ -8,7 +8,7 @@ Nothing is ever sent anywhere except to Ollama on `localhost`.
 
 ```bash
 # install Ollama: https://ollama.com/download
-ollama pull gemma3        # or gemma3:1b / gemma3:4b for a smaller/faster model
+ollama pull gemma4:e2b     # Gemma 4's edge-optimized "effective 2B" variant
 ollama serve               # usually starts automatically after install
 ```
 
@@ -43,7 +43,7 @@ Once loaded in Chrome/Edge, use the install icon in the address bar (or
 
 Open Settings (gear icon in the sidebar) and set:
 - **Ollama host** — defaults to `http://localhost:11434`
-- **Model name** — must match a model you've pulled (`gemma3`, `gemma3:4b`, etc.)
+- **Model name** — must match a model you've pulled (`gemma4:e2b`, `gemma4:e4b`, etc.)
 
 ## What's implemented
 
