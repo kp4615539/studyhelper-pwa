@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>StudyHelper — Smarter studying, better results.</title>
+<meta name="description" content="Your offline AI study companion, powered by Gemma running locally on your device." />
+<meta name="theme-color" content="#12181f" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon-192.svg" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== LANDING VIEW ===================== -->
+<div id="landing-view">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 5.5C2 5.5 5 4 9 4s7 1.5 7 1.5v13.5s-3-1.5-7-1.5-7 1.5-7 1.5V5.5Z"/><path d="M22 5.5c0 0-3-1.5-7-1.5s-2 0-2 0v13.5s1-1.5-2-1.5" style="display:none"/></svg>
+        <span>StudyHelper</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#">Home</a>
+        <a href="#features">Features</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="btn-login">Log in</button>
+        <button class="btn btn-dark" id="btn-getstarted">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">✦ RUNS FULLY OFFLINE</span>
+      <h1>Smarter studying,<br/>better results.</h1>
+      <p class="lede">Your AI study companion that helps you understand concepts, solve problems and stay organised — powered by Gemma, running entirely on your device.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-dark btn-lg" id="btn-start-free">Start for Free</button>
+        <button class="btn btn-outline btn-lg" id="btn-how">▷ See How It Works</button>
+      </div>
+      <ul class="hero-points">
+        <li><span class="dot dot-blue"></span>Explain any topic</li>
+        <li><span class="dot dot-amber"></span>Solve step-by-step</li>
+        <li><span class="dot dot-green"></span>Summarise notes</li>
+      </ul>
+    </div>
+
+    <div class="hero-demo" aria-hidden="true">
+      <div class="demo-sidebar">
+        <button class="demo-newchat">+ New Chat</button>
+        <div class="demo-nav">
+          <div class="demo-nav-item active">⌂ Home</div>
+          <div class="demo-nav-item">▤ Notes</div>
+          <div class="demo-nav-item">▤ Documents</div>
+          <div class="demo-nav-item">⛶ Flashcards</div>
+          <div class="demo-nav-item">↺ History</div>
+        </div>
+        <div class="demo-nav-item settings">⚙ Settings</div>
+      </div>
+      <div class="demo-main">
+        <div class="demo-today">Today</div>
+        <div class="demo-bubble user">Explain photosynthesis in simple terms.</div>
+        <div class="demo-bubble bot">
+          <span class="spark">✦</span>
+          <div>
+            <p>Photosynthesis is the process used by plants to make their own food. They use sunlight, water, and carbon dioxide to create glucose (food) and oxygen.</p>
+            <p>The general equation is:</p>
+            <code>6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ + 6O₂</code>
+          </div>
+        </div>
+        <div class="demo-input">Ask anything… <span class="send">➤</span></div>
+      </div>
+    </div>
+  </main>
+
+  <section class="features" id="features">
+    <div class="wrap">
+      <h2>Everything you need to study better</h2>
+      <p class="section-sub">Powerful AI tools, private by design — nothing ever leaves your device.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">💬</div>
+          <h3>Explain Any Topic</h3>
+          <p>Get clear, easy to understand explanations on any topic instantly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-green">√x</div>
+          <h3>Solve Step-by-Step</h3>
+          <p>Type a question and get detailed, step-by-step solutions.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-amber">▤</div>
+          <h3>Summarise Notes</h3>
+          <p>Turn long notes or PDFs into concise summaries in seconds.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">⛶</div>
+          <h3>Smart Flashcards</h3>
+          <p>Automatically generate flashcards and test yourself smarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 StudyHelper. Runs offline via Ollama.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== APP VIEW (CHAT) ===================== -->
+<div id="app-view" class="hidden">
+  <aside class="app-sidebar">
+    <div class="brand small"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 5.5C2 5.5 5 4 9 4s7 1.5 7 1.5v13.5s-3-1.5-7-1.5-7 1.5-7 1.5V5.5Z"/></svg><span>StudyHelper</span></div>
+    <button class="demo-newchat" id="btn-newchat">+ New Chat</button>
+    <nav class="demo-nav">
+      <div class="demo-nav-item active" data-tab="home">⌂ Home</div>
+      <div class="demo-nav-item" data-tab="notes">▤ Notes</div>
+      <div class="demo-nav-item" data-tab="documents">▤ Documents</div>
+      <div class="demo-nav-item" data-tab="flashcards">⛶ Flashcards</div>
+      <div class="demo-nav-item" data-tab="history">↺ History</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="demo-nav-item" id="btn-settings">⚙ Settings</div>
+      <div class="conn-status" id="conn-status">
+        <span class="conn-dot"></span><span id="conn-text">Checking Ollama…</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="app-topbar">
+      <span id="tab-title">Today</span>
+      <button class="btn btn-ghost btn-sm" id="btn-back-landing">← Back to site</button>
+    </header>
+
+    <section class="chat-pane" id="tab-home">
+      <div class="chat-scroll" id="chat-scroll">
+        <div class="empty-state" id="empty-state">
+          <span class="spark big">✦</span>
+          <h2>Ask me anything</h2>
+          <p>I run entirely offline on this device via Ollama + Gemma. No internet required once a model is pulled.</p>
+        </div>
+      </div>
+      <div id="chat-attachments" class="chat-attachments hidden"></div>
+      <div id="attach-picker" class="attach-picker hidden"></div>
+      <div class="chat-input-row">
+        <button id="btn-attach" class="btn-icon" title="Attach a document">📎</button>
+        <input type="text" id="chat-input" placeholder="Ask anything…" autocomplete="off" />
+        <button id="btn-send" aria-label="Send">➤</button>
+      </div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section class="placeholder-pane hidden" id="tab-documents">
+      <div class="pane-head">
+        <h2>Documents</h2>
+        <label class="btn btn-dark btn-sm file-btn">
+          + Upload
+          <input type="file" id="doc-upload" accept=".txt,.md,.pdf" multiple hidden />
+        </label>
+      </div>
+      <p class="pane-sub">Upload .txt, .md, or .pdf files. Text is extracted and stored locally — nothing is uploaded anywhere. Select documents to attach as context in your next chat message.</p>
+      <div id="doc-list" class="card-list"><p class="empty-hint">No documents yet.</p></div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="placeholder-pane hidden" id="tab-notes">
+      <div class="pane-head">
+        <h2>Notes</h2>
+        <button class="btn btn-dark btn-sm" id="btn-new-note">+ New Note</button>
+      </div>
+      <div id="note-editor" class="note-editor hidden">
+        <input type="text" id="note-title" placeholder="Note title" />
+        <textarea id="note-content" rows="8" placeholder="Write your note…"></textarea>
+        <div class="modal-actions">
+          <button class="btn btn-ghost btn-sm" id="btn-note-cancel">Cancel</button>
+          <button class="btn btn-dark btn-sm" id="btn-note-save">Save Note</button>
+        </div>
+      </div>
+      <div id="note-list" class="card-list"><p class="empty-hint">No notes yet.</p></div>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section class="placeholder-pane hidden" id="tab-flashcards">
+      <div class="pane-head">
+        <h2>Flashcards</h2>
+      </div>
+      <div class="flashcard-gen">
+        <input type="text" id="fc-topic" placeholder="Topic (e.g. Photosynthesis) or leave blank to use a source below" />
+        <select id="fc-source">
+          <option value="">No source — use topic only</option>
+        </select>
+        <input type="number" id="fc-count" min="3" max="15" value="6" title="Number of cards" />
+        <button class="btn btn-dark btn-sm" id="btn-fc-generate">Generate</button>
+      </div>
+      <div id="fc-status" class="fc-status hidden"></div>
+      <div id="fc-sets" class="card-list"><p class="empty-hint">No flashcard sets yet.</p></div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="placeholder-pane hidden" id="tab-history">
+      <h2>History</h2>
+      <div id="history-list" class="card-list"><p class="empty-hint">No previous chats yet.</p></div>
+    </section>
+  </main>
+</div>
+
+
+<!-- ===================== SETTINGS MODAL ===================== -->
+<div id="settings-modal" class="modal hidden">
+  <div class="modal-card">
+    <h3>Settings</h3>
+    <label>Ollama host
+      <input type="text" id="setting-host" placeholder="http://localhost:11434" />
+    </label>
+    <label>Model name
+      <input type="text" id="setting-model" placeholder="gemma3" />
+    </label>
+    <p class="hint">Model must already be pulled via <code>ollama pull gemma3</code>. If this app is served from a different origin than Ollama, set <code>OLLAMA_ORIGINS=*</code> before starting the Ollama server.</p>
+    <div class="modal-actions" style="justify-content:space-between;">
+      <button class="btn btn-ghost danger" id="btn-clear-data">Clear all data</button>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-ghost" id="btn-settings-cancel">Cancel</button>
+        <button class="btn btn-dark" id="btn-settings-save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
