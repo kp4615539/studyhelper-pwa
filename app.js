@@ -35,7 +35,6 @@ function showLanding() {
 }
 el('btn-getstarted').onclick = showApp;
 el('btn-start-free').onclick = showApp;
-el('btn-login').onclick = showApp;
 el('btn-back-landing').onclick = showLanding;
 
 // tab switching inside app
