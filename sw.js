@@ -1,7 +1,7 @@
 // sw.js — caches the app shell so the UI loads offline.
 // Note: it does NOT (and cannot) cache Ollama responses — the model itself
 // runs locally via the Ollama server, which must be running on the device.
-const CACHE_NAME = 'studyhelper-shell-v1';
+const CACHE_NAME = 'studyhelper-shell-v2';
 const SHELL_FILES = [
   './',
   './index.html',
