@@ -168,6 +168,7 @@ function switchTab(tab) {
   });
   const titles = { home: 'Today', subjects: 'Subjects', notes: 'Notes', documents: 'Documents', flashcards: 'Flashcards', quizzes: 'Quizzes', history: 'History' };
   el('tab-title').textContent = titles[tab] || 'Today';
+  if (tab === 'home' && !state.currentChatId) createNewChatRecord();
   if (tab === 'history') refreshHistoryTab();
   if (tab === 'documents') refreshDocumentsTab();
   if (tab === 'notes') refreshNotesTab();
@@ -417,7 +418,7 @@ async function refreshSubjectsTab() {
 }
 
 // ===================== CHAT =====================
-async function startNewChat() {
+async function createNewChatRecord() {
   const chat = await DB.createChat('New chat', state.subjectFilter || null);
   state.currentChatId = chat.id;
   state.attachedDocIds.clear();
@@ -425,6 +426,10 @@ async function startNewChat() {
   el('chat-subject').value = chat.subjectId || '';
   el('chat-scroll').innerHTML = '';
   el('chat-scroll').appendChild(makeEmptyState());
+  return chat;
+}
+async function startNewChat() {
+  await createNewChatRecord();
   switchTab('home');
 }
 function makeEmptyState() {
@@ -1104,7 +1109,7 @@ async function refreshHistoryTab() {
       e.stopPropagation();
       if (!confirm(`Delete chat "${c.title}"?`)) return;
       await DB.deleteChat(c.id);
-      if (state.currentChatId === c.id) startNewChat();
+      if (state.currentChatId === c.id) state.currentChatId = null; // lazily recreated when Home is next opened
       refreshHistoryTab();
     };
     actions.appendChild(delBtn);
